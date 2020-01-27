@@ -11,9 +11,11 @@
 #define _CN 	_CONTROL
 
 #define nini 	3
+#define unicode 4
 
 #define MO_FN 	MO(_FUNCTION)
 #define NINI 	MO(nini)
+#define UNICODE MO(unicode)
 #define _CTRL 	MO(_CONTROL)
 
 #define SCRCLIP	C(S(KC_PAST)) 	// ShareX Screenshot to Clipboard		Ctrl+Shift+*
@@ -25,7 +27,7 @@
 #define RGB_MSW RGB_M_SW
 #define RGB_MSN RGB_M_SN
 
-#define LAYOUT_nini( \
+#define LAYOUT_nini_zilents( \
     k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, k0a, k0b, k0c, kins0, k0e, \
     k10,      k12, k13, k14, k15, k16, k17, k18, k19, k1a, k1b, k1c, k1d,      \
     k20,      k22, k23, k24, k25, k26, k27, k28, k29, k2a, k2b, k2c, k1e, k2d, \
@@ -39,9 +41,17 @@
     { k40,  k41,   KC_NO, k43,  KC_NO, KC_NO, k46,  KC_NO, KC_NO, KC_NO, k4a,  k4b,  KC_NO, k4d,   k4e   }  \
 }
 
+enum _unicode_indexes {
+	CLWN,	
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+	[CLWN]	= 0x1F921,	
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [AZERTY] = LAYOUT_nini(
+  [AZERTY] = LAYOUT_nini_zilents(
     //       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16
     KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_BSPC,
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,
@@ -50,16 +60,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, NINI,    _CTRL,   KC_RCTL
   ),
 
-  [_FUNCTION] = LAYOUT_nini(
+  [_FUNCTION] = LAYOUT_nini_zilents(
     //       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16
     KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_DEL,
     _______, KC_GRV,  KC_UP,   _______, _______, _______, _______, KC_HOME, _______, KC_END,  KC_PGUP, KC_PSCR, KC_INS,
     _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, _______, _______, _______, KC_PGDN, KC_MPRV, KC_MNXT, KC_PAUS,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, _______,
     _______, _______, _______,                   _______,                            _______, _______, _______, _______
   ),
 
-  [_CONTROL] = LAYOUT_nini(
+  [_CONTROL] = LAYOUT_nini_zilents(
     //       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16
     TG(_CN), SCRCLIP, SCRUPLD, MP4FLDR, GIFUPLD, OCR,     _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, _______, _______, _______, _______, _______, _______,
@@ -68,12 +78,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______,                   XXXXXXX,                            _______, _______, _______, _______
   ),
 
-  [nini] = LAYOUT_nini(
+  [nini] = LAYOUT_nini_zilents(
   	//       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16
-  	_______, KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_NLCK,
+  	_______, KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS, _______, _______, _______, _______, _______, _______, _______, _______, UNICODE, KC_NLCK,
     _______, KC_P7,   KC_P8,   KC_P9,   _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, KC_P4,   KC_P5,   KC_P6,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, _______, KC_P1,   KC_P2,   KC_P3,   _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, KC_PDOT, KC_P0,                   _______,                            _______, _______, _______, _______
+    _______, KC_PDOT, KC_P0,                   	 _______,                            _______, _______, _______, _______
+  ),
+  		
+  [unicode] = LAYOUT_nini_zilents(
+  	//       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16
+  	_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, X(CLWN), _______, _______, _______, _______, _______, _______, _______, _______, UC_M_OS, UC_M_LN, UC_M_WI,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______,                   _______,                            _______, _______, _______, _______
   ),
 };
